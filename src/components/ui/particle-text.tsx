@@ -76,10 +76,25 @@ export function ParticleText({ text, fontSize = 72, className, tag: Tag = "h2" }
     const containerWidth = containerRef.current.clientWidth;
     const containerHeight = containerRef.current.clientHeight;
 
+<<<<<<< HEAD
     const clampedFontSize = Math.max(48, Math.min(96, containerWidth * 0.12));
 
     const width = containerWidth;
     const height = Math.max(containerHeight, clampedFontSize * 1.5);
+=======
+    const htmlNode = containerRef.current.children[1] as HTMLElement;
+    const computedStyle = htmlNode ? getComputedStyle(htmlNode) : null;
+    const actualFontSize = computedStyle ? parseFloat(computedStyle.fontSize) : fontSize;
+    const actualLineHeight = computedStyle && computedStyle.lineHeight !== 'normal' 
+      ? parseFloat(computedStyle.lineHeight) 
+      : actualFontSize * 1.1;
+    const actualFontWeight = computedStyle ? computedStyle.fontWeight : "800";
+    const actualFontFamily = computedStyle ? computedStyle.fontFamily : "Syne, sans-serif";
+    const actualLetterSpacing = computedStyle && computedStyle.letterSpacing !== 'normal' ? computedStyle.letterSpacing : "0px";
+
+    const width = containerWidth;
+    const height = Math.max(containerHeight, actualFontSize * 1.5);
+>>>>>>> 4f42d50 (Added Clarity)
     
     canvas.width = width;
     canvas.height = height;
@@ -91,8 +106,16 @@ export function ParticleText({ text, fontSize = 72, className, tag: Tag = "h2" }
     if (!offCtx) return;
 
     offCtx.fillStyle = particleColor;
+<<<<<<< HEAD
     offCtx.font = `800 ${clampedFontSize}px Syne, sans-serif`;
     offCtx.textBaseline = "top";
+=======
+    offCtx.font = `${actualFontWeight} ${actualFontSize}px ${actualFontFamily}`;
+    offCtx.textBaseline = "top";
+    if ('letterSpacing' in offCtx) {
+      (offCtx as any).letterSpacing = actualLetterSpacing;
+    }
+>>>>>>> 4f42d50 (Added Clarity)
     
     const words = text.split(" ");
     let line = "";
@@ -110,9 +133,14 @@ export function ParticleText({ text, fontSize = 72, className, tag: Tag = "h2" }
     }
     lines.push(line.trim());
 
+<<<<<<< HEAD
     const lineHeight = clampedFontSize * 1.1;
     lines.forEach((l, i) => {
       offCtx.fillText(l, 0, i * lineHeight + 5);
+=======
+    lines.forEach((l, i) => {
+      offCtx.fillText(l, 0, i * actualLineHeight + 5);
+>>>>>>> 4f42d50 (Added Clarity)
     });
 
     const imgData = offCtx.getImageData(0, 0, offscreen.width, offscreen.height);
@@ -131,10 +159,14 @@ export function ParticleText({ text, fontSize = 72, className, tag: Tag = "h2" }
       }
     }
 
+<<<<<<< HEAD
     if (targets.length > 6000) {
       targets.sort(() => Math.random() - 0.5);
       targets.length = 6000;
     }
+=======
+    // No artificial cap on targets.length to prevent missing particles
+>>>>>>> 4f42d50 (Added Clarity)
 
     const startTime = performance.now();
     const particles = targets.map((t) => ({

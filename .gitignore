@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# original uncompressed video backups (large binaries, not for git)
+/video-originals-backup
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

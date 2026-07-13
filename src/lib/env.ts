@@ -1,10 +1,10 @@
 import { z } from "zod";
 
 const envSchema = z.object({
-  RESEND_API_KEY: z.string().default("placeholder_resend_key"),
-  NEXT_PUBLIC_SITE_URL: z.string().url().default("https://recolt.io"),
-  UPSTASH_REDIS_REST_URL: z.string().url().default("https://example-upstash-url.upstash.io"), // Added default for development until user adds real key
-  UPSTASH_REDIS_REST_TOKEN: z.string().default("placeholder_token"),
+  NEXT_PUBLIC_SUPABASE_URL: z.string().url("Must be a valid URL"),
+  NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().min(1, "Missing Anon Key"),
+  SUPABASE_SERVICE_ROLE_KEY: z.string().min(1, "Missing Service Role Key"),
+  TRACKING_SECRET: z.string().min(16, "TRACKING_SECRET must be at least 16 characters"),
 });
 
 // Validate environment variables on boot

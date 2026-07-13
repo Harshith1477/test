@@ -261,7 +261,11 @@ export function PixelHero({
   }, [theme]);
 
   return (
+<<<<<<< HEAD
     <div className="relative w-full min-h-[100dvh] bg-background flex flex-col justify-between md:justify-center md:gap-6 py-8 md:py-0 px-2 sm:px-6 overflow-hidden select-none isolate">
+=======
+    <div className="relative w-full min-h-[100dvh] bg-background flex flex-col justify-center items-center gap-4 md:gap-6 px-2 sm:px-6 overflow-hidden select-none isolate">
+>>>>>>> 4f42d50 (Added Clarity)
       <style>{`
         @keyframes marquee {
           0% { transform: translateX(0%); }
@@ -293,14 +297,22 @@ export function PixelHero({
       </div>
 
       {/* Top Container: Tahoe Glass Header */}
+<<<<<<< HEAD
       <div className="flex flex-col items-center justify-center text-center order-1 md:order-1 mt-28 sm:mt-0 pointer-events-none w-full">
+=======
+      <div className="flex flex-col items-center justify-center text-center order-1 w-full pointer-events-none">
+>>>>>>> 4f42d50 (Added Clarity)
         <h1 className="tahoe-glass-text flex flex-row items-center justify-center gap-1.5 sm:gap-4 lg:gap-6 px-1 w-full flex-wrap text-[3.3rem] xs:text-[3.8rem] sm:text-7xl md:text-[110px] lg:text-[150px] leading-none">
           <span className="font-vintage font-normal tracking-tighter">{word2}</span>
         </h1>
       </div>
 
       {/* Center Container: Description */}
+<<<<<<< HEAD
       <div className="flex flex-col items-center justify-center text-center my-auto md:my-0 order-2 md:order-2 px-1 w-full pointer-events-none">
+=======
+      <div className="flex flex-col items-center justify-center text-center order-2 px-1 w-full pointer-events-none">
+>>>>>>> 4f42d50 (Added Clarity)
         <p className="text-lg sm:text-xl md:text-2xl font-vintage tracking-widest text-foreground/50 mt-4">
           For founders who refuse to compromise.
         </p>

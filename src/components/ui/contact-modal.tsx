@@ -61,6 +61,10 @@ const budgetOptionsMap: Record<string, string[]> = {
 
 export function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
+<<<<<<< HEAD
+=======
+  const [cooldown, setCooldown] = useState(0);
+>>>>>>> 4f42d50 (Added Clarity)
   
   // Form state
   const [name, setName] = useState("");
@@ -97,6 +101,19 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
     }
   }, [isOpen]);
 
+<<<<<<< HEAD
+=======
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (cooldown > 0) {
+      timer = setInterval(() => {
+        setCooldown(prev => prev - 1);
+      }, 1000);
+    }
+    return () => clearInterval(timer);
+  }, [cooldown]);
+
+>>>>>>> 4f42d50 (Added Clarity)
   if (!isOpen) return null;
 
   const validate = () => {
@@ -172,6 +189,10 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
       if (res.ok) {
         setStatus("success");
+<<<<<<< HEAD
+=======
+        setCooldown(60);
+>>>>>>> 4f42d50 (Added Clarity)
         setTimeout(() => {
           onClose();
         }, 2000);
@@ -186,8 +207,13 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
     }
   };
 
+<<<<<<< HEAD
   const inputClasses = "w-full px-4 py-3 rounded-xl border border-foreground/10 bg-foreground/5 focus:outline-none focus:border-foreground/30 text-sm text-foreground transition-colors placeholder:text-foreground/30 font-[family-name:var(--font-geist-sans)]";
   const errorInputClasses = "w-full px-4 py-3 rounded-xl border border-red-500/50 bg-red-500/5 focus:outline-none focus:border-red-500 text-sm text-foreground transition-colors placeholder:text-foreground/30 font-[family-name:var(--font-geist-sans)]";
+=======
+  const inputClasses = "w-full px-4 py-3 rounded-xl border border-foreground/10 bg-foreground/5 focus:outline-none focus:border-foreground/30 text-sm text-foreground transition-colors placeholder:text-foreground/30 font-system tracking-normal";
+  const errorInputClasses = "w-full px-4 py-3 rounded-xl border border-red-500/50 bg-red-500/5 focus:outline-none focus:border-red-500 text-sm text-foreground transition-colors placeholder:text-foreground/30 font-system tracking-normal";
+>>>>>>> 4f42d50 (Added Clarity)
   
   const selectWrapperClasses = "relative w-full";
   const selectIconClasses = "absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/50 pointer-events-none";
@@ -232,7 +258,11 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
             <h2 className="text-2xl font-bold">Let's talk.</h2>
             <p className="text-foreground/40 text-sm mb-6 mt-1">Tell us what you're building.</p>
 
+<<<<<<< HEAD
             <form onSubmit={handleSubmit} className="flex flex-col gap-4 font-[family-name:var(--font-geist-sans)]">
+=======
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4 font-sans">
+>>>>>>> 4f42d50 (Added Clarity)
               <input 
                 type="text" 
                 name="website_url" 
@@ -294,7 +324,11 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                               placeholder="Search country..." 
                               value={countrySearch}
                               onChange={e => setCountrySearch(e.target.value)}
+<<<<<<< HEAD
                               className="w-full bg-foreground/5 border border-foreground/10 rounded-lg px-3 py-1.5 text-xs focus:outline-none focus:border-[#00C9A7]/50 text-foreground transition-colors placeholder:text-foreground/30"
+=======
+                              className="w-full bg-foreground/5 border border-foreground/10 rounded-lg px-3 py-1.5 text-xs focus:outline-none focus:border-[#00C9A7]/50 text-foreground transition-colors placeholder:text-foreground/30 font-system tracking-normal"
+>>>>>>> 4f42d50 (Added Clarity)
                               autoFocus
                             />
                           </div>
@@ -307,7 +341,11 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                               >
                                 <span className="text-base leading-none">{c.flag}</span>
                                 <span className="text-foreground/50 w-10 font-medium">{c.code}</span>
+<<<<<<< HEAD
                                 <span className="truncate">{c.name}</span>
+=======
+                                <span className="truncate font-system">{c.name}</span>
+>>>>>>> 4f42d50 (Added Clarity)
                               </div>
                             )) : (
                               <div className="p-3 text-center text-xs text-foreground/40">No countries found</div>
@@ -409,14 +447,24 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
               <button 
                 type="submit" 
+<<<<<<< HEAD
                 disabled={status === "submitting" || !isFormValid}
                 className="w-full mt-2 bg-[#00C9A7] text-[#000000] font-bold py-3 px-4 rounded-xl transition-all flex justify-center items-center gap-2 disabled:opacity-50 hover:enabled:opacity-90 disabled:cursor-not-allowed"
+=======
+                disabled={status === "submitting" || !isFormValid || cooldown > 0}
+                className="w-full mt-2 bg-[#00C9A7] text-[#000000] font-bold py-3 px-4 rounded-xl transition-all flex justify-center items-center gap-2 disabled:opacity-50 hover:enabled:opacity-90 disabled:cursor-not-allowed font-system tracking-normal"
+>>>>>>> 4f42d50 (Added Clarity)
               >
                 {status === "submitting" ? (
                   <>
                     <span className="w-4 h-4 border-2 border-black/30 border-t-black rounded-full animate-spin"></span>
                     Sending...
                   </>
+<<<<<<< HEAD
+=======
+                ) : cooldown > 0 ? (
+                  `Please wait ${cooldown}s before submitting again`
+>>>>>>> 4f42d50 (Added Clarity)
                 ) : (
                   "Send Message"
                 )}

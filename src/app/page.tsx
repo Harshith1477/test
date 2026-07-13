@@ -6,23 +6,17 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { ContactModal } from "@/components/ui/contact-modal";
 import { ParticleText } from "@/components/ui/particle-text";
 import { ServiceCard } from "@/components/ui/service-card";
+import { HamburgerButton } from "@/components/HamburgerButton";
+import { NavOverlay } from "@/components/NavOverlay";
+
 import { cn } from "@/lib/utils";
 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isNavOpen, setIsNavOpen] = useState(false);
 
   useEffect(() => {
-    // Track visit
-    fetch("/api/track-visit", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        page: window.location.pathname,
-        referrer: document.referrer || "direct"
-      })
-    }).catch(console.error);
-
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
@@ -50,6 +44,7 @@ export default function Home() {
       
       {/* NAVBAR */}
       <header
+        aria-hidden={isNavOpen}
         className={cn(
           "fixed top-0 left-0 w-full z-50 transition-all duration-300",
           scrolled
@@ -71,7 +66,7 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="flex-1 flex flex-col">
+      <main aria-hidden={isNavOpen} className="flex-1 flex flex-col">
         {/* HERO */}
         <PixelHero word1="" word2="Recolt" />
 
@@ -178,8 +173,9 @@ export default function Home() {
       </main>
 
       {/* FOOTER */}
-      <footer className="py-8 px-6 border-t border-foreground/10">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+
+      <footer aria-hidden={isNavOpen} className="py-8 px-6 border-t border-foreground/10">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 md:gap-4 text-center md:text-left">
           <span className="font-bold text-foreground font-vintage">Recolt</span>
           <span className="text-foreground/40 text-sm">For founders who refuse to compromise.</span>
           <a href="mailto:recoltagency@gmail.com" className="text-foreground/60 hover:text-foreground text-sm transition-colors font-system">
@@ -190,6 +186,10 @@ export default function Home() {
       </footer>
 
       <ContactModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+
+
+      <NavOverlay isOpen={isNavOpen} onClose={() => setIsNavOpen(false)} />
+      <HamburgerButton isOpen={isNavOpen} onClick={() => setIsNavOpen((v) => !v)} />
     </div>
   );
 }
